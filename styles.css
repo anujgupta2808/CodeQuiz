@@ -774,9 +774,9 @@ button:disabled {
         to { opacity: 1; transform: translateX(0); }
     }
     
-    body{
+    /* body{
         width: 119%;
-    }
+    } */
     nav { flex-wrap: wrap; position: relative; }
     
     header h1 { font-size: 2.5rem; }
@@ -830,7 +830,7 @@ button:disabled {
 }
 
 .hero h1 {
-    font-size: 3.5rem;
+    font-size: 40px;
     margin-bottom: 1.5rem;
     font-weight: 800;
     text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
@@ -966,7 +966,7 @@ button:disabled {
 }
 
 .learning-header h1 {
-    font-size: 3rem;
+    font-size: 50px;
     font-weight: 800;
     text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
 }
@@ -992,6 +992,8 @@ button:disabled {
     margin-bottom: 1.5rem;
     font-weight: 700;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    /* width: 100px; */
+    /* margin-right: 10%; */
 }
 
 .topic-section ul {
@@ -1005,6 +1007,7 @@ button:disabled {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     margin-top: 1.5rem;
+
 }
 
 .resource-card {
@@ -1015,6 +1018,7 @@ button:disabled {
     border-left: 4px solid #6366f1;
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s;
+    width: 80%;
 }
 
 .resource-card:hover {
@@ -1031,6 +1035,8 @@ button:disabled {
 .resource-card p {
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 0.5rem;
+    /* width: 500px; */
+    
 }
 
 .resource-card a {
