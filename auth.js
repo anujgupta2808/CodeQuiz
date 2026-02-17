@@ -62,22 +62,22 @@ const Auth = {
             email: user.email
         };
 
-        sessionStorage.setItem('userData', JSON.stringify(userData));
-        sessionStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userData', JSON.stringify(userData));
+        localStorage.setItem('isLoggedIn', 'true');
 
         return { success: true, message: 'Login successful!', user: userData };
     },
 
     // Logout user
     logout() {
-        sessionStorage.removeItem('isLoggedIn');
-        sessionStorage.removeItem('userData');
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userData');
         return { success: true, message: 'Logged out successfully!' };
     },
 
     // Check if user is logged in
     isAuthenticated() {
-        return sessionStorage.getItem('isLoggedIn') === 'true';
+        return localStorage.getItem('isLoggedIn') === 'true';
     },
 
     // Get current user
@@ -85,7 +85,7 @@ const Auth = {
         if (!this.isAuthenticated()) {
             return null;
         }
-        return JSON.parse(sessionStorage.getItem('userData'));
+        return JSON.parse(localStorage.getItem('userData'));
     },
 
     // Require authentication (redirect if not logged in)
