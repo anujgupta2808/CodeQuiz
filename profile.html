@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Programming Quiz</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="quiz-styles.css">
+    <script src="auth.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo"><img src="favicon.svg" alt="CodeQuiz" style="width: 32px; height: 32px; margin-right: 0.5rem;"> CodeQuiz</a>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="learning.html">Learning</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="profile.html" class="active">Profile</a></li>
+        </ul>
+    </nav>
+
+    <div class="about-header">
+        <h1>👤 My Profile</h1>
+        <p>Track your progress and achievements</p>
+    </div>
+
+    <div class="about-content">
+        <div class="about-section">
+            <h2>Personal Details</h2>
+            <div style="color: rgba(255, 255, 255, 0.9); line-height: 2;">
+                <p><strong>Name:</strong> <span id="user-name">-</span></p>
+                <p><strong>Email:</strong> <span id="user-email">-</span></p>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>User Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <h3 id="total-solved">0</h3>
+                    <p>Problems Solved</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="current-streak">0</h3>
+                    <p>Day Streak</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="accuracy-rate">0%</h3>
+                    <p>Accuracy</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="total-attempts">0</h3>
+                    <p>Total Attempts</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>Recent Activity</h2>
+            <div id="recent-activity" style="color: rgba(255, 255, 255, 0.9); line-height: 2;">
+                <p>No recent activity yet. Start solving challenges!</p>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>Language Progress</h2>
+            <div id="language-progress"></div>
+        </div>
+
+        <div class="about-section">
+            <h2>Settings</h2>
+            <button class="submit-btn" onclick="logout()" style="max-width: 300px; margin-bottom: 1rem; background: linear-gradient(135deg, #f59e0b, #d97706);">Logout</button>
+            <button class="submit-btn" onclick="resetProgress()" style="max-width: 300px;">Reset All Progress</button>
+        </div>
+    </div>
+
+    <footer style="background: #333; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
+        <p>&copy; 2024 Programming Quiz. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+                menu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+
+        function loadProfile() {
+            // Check authentication using Auth module
+            Auth.requireAuth();
+
+            const userData = Auth.getCurrentUser();
+            document.getElementById('user-name').textContent = userData.name || 'Guest User';
+            document.getElementById('user-email').textContent = userData.email || 'Not provided';
+
+            const score = parseInt(localStorage.getItem('score')) || 0;
+            const correct = parseInt(localStorage.getItem('correctAnswers')) || 0;
+            const total = parseInt(localStorage.getItem('totalQuestions')) || 0;
+            const streak = parseInt(localStorage.getItem('streak')) || 0;
+            const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+            document.getElementById('total-solved').textContent = correct;
+            document.getElementById('current-streak').textContent = streak;
+            document.getElementById('accuracy-rate').textContent = accuracy + '%';
+            document.getElementById('total-attempts').textContent = total;
+
+            const history = JSON.parse(localStorage.getItem('quizHistory')) || [];
+            const activityDiv = document.getElementById('recent-activity');
+            
+            if (history.length > 0) {
+                activityDiv.innerHTML = history.slice(-5).reverse().map(item => 
+                    `<div style="padding: 0.8rem; background: rgba(255,255,255,0.1); border-radius: 15px; margin-bottom: 0.5rem;">
+                        <strong>${item.category || 'Quiz'}</strong> - ${item.result || 'Completed'} 
+                        <span style="opacity: 0.7; font-size: 0.9rem;">(${item.date || 'Recently'})</span>
+                    </div>`
+                ).join('');
+            }
+
+            const languages = ['HTML', 'CSS', 'JavaScript', 'PHP', 'C', 'C++', 'Java', 'Python'];
+            const progressDiv = document.getElementById('language-progress');
+            
+            progressDiv.innerHTML = languages.map(lang => {
+                const solved = parseInt(localStorage.getItem(`${lang.toLowerCase()}_solved`)) || 0;
+                const total = 90;
+                const percent = Math.min(Math.round((solved / total) * 100), 100);
+                
+                return `
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: white;">
+                            <strong>${lang}</strong>
+                            <span>${solved}/${total}</span>
+                        </div>
+                        <div style="width: 100%; height: 20px; background: rgba(0,0,0,0.2); border-radius: 50px; overflow: hidden;">
+                            <div style="width: ${percent}%; height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 50px; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+                // Keep only user accounts in localStorage
+                const users = localStorage.getItem('users');
+                localStorage.clear();
+                if (users) localStorage.setItem('users', users);
+                location.reload();
+            }
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                Auth.logout();
+                window.location.href = 'login.html';
+            }
+        }
+
+        loadProfile();
+    </script>
+</body>
+</html>

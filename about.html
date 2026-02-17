@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Programming Quiz</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="quiz-styles.css">
+</head>
+<body>
+    <nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <a href="index.html" class="nav-logo"><img src="favicon.svg" alt="CodeQuiz" style="width: 32px; height: 32px; margin-right: 0.5rem;"> CodeQuiz</a>
+        <ul id="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="learning.html">Learning</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li id="profile-nav" style="display: none;"><a href="profile.html">Profile</a></li>
+        </ul>
+    </nav>
+
+    <div class="about-header">
+        <h1>ℹ️ About Us</h1>
+        <p>Empowering developers through interactive learning</p>
+    </div>
+
+    <div class="about-content">
+        <div class="about-section">
+            <h2>Our Mission</h2>
+            <p>We believe that learning programming should be accessible, engaging, and effective. Our platform provides a comprehensive quiz system that helps developers of all levels test and improve their coding knowledge across multiple programming languages.</p>
+            <p>Whether you're a beginner taking your first steps in web development or an experienced programmer looking to brush up on advanced concepts, our quiz platform offers the perfect learning environment.</p>
+        </div>
+
+        <div class="about-section">
+            <h2>Platform Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <h3>720+</h3>
+                    <p>Total Questions</p>
+                </div>
+                <div class="stat-box">
+                    <h3>8</h3>
+                    <p>Languages</p>
+                </div>
+                <div class="stat-box">
+                    <h3>3</h3>
+                    <p>Difficulty Levels</p>
+                </div>
+                <div class="stat-box">
+                    <h3>100%</h3>
+                    <p>Free Access</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>What We Offer</h2>
+            <ul style="line-height: 2;">
+                <li><strong>Comprehensive Coverage:</strong> Questions spanning from basic syntax to advanced concepts</li>
+                <li><strong>Multiple Languages:</strong> HTML, CSS, JavaScript, PHP, C, C++, Java, and Python</li>
+                <li><strong>Instant Feedback:</strong> Get immediate results with correct answers</li>
+                <li><strong>Progress Tracking:</strong> Monitor your score and improvement over time</li>
+                <li><strong>Flexible Learning:</strong> Filter questions by language and difficulty</li>
+                <li><strong>No Registration:</strong> Start learning immediately without sign-up</li>
+            </ul>
+        </div>
+
+        <div class="about-section">
+            <h2>Why Choose Us?</h2>
+            <p><strong>Quality Content:</strong> All questions are carefully curated to cover essential programming concepts and real-world scenarios.</p>
+            <p><strong>User-Friendly Interface:</strong> Clean, intuitive design that makes learning enjoyable and distraction-free.</p>
+            <p><strong>Regular Updates:</strong> We continuously add new questions and improve existing content based on user feedback.</p>
+            <p><strong>Community Driven:</strong> Built by developers, for developers, with a focus on practical knowledge.</p>
+        </div>
+
+        <div class="about-section">
+            <h2>Our Vision</h2>
+            <p>We envision a world where quality programming education is accessible to everyone, regardless of their background or location. By providing free, high-quality learning resources, we aim to contribute to the growth of the global developer community.</p>
+            <p>Our goal is to help thousands of developers enhance their skills, prepare for technical interviews, and advance their careers in software development.</p>
+        </div>
+
+        <div class="about-section">
+            <h2>Get Started</h2>
+            <p>Ready to test your programming knowledge? Head over to our <a href="quiz-game.html" style="color: #667eea; text-decoration: none; font-weight: bold;">Test</a> page and start your learning journey today!</p>
+            <p>Have questions or feedback? Visit our <a href="contact.html" style="color: #667eea; text-decoration: none; font-weight: bold;">Contact</a> page to get in touch with us.</p>
+        </div>
+    </div>
+
+    <footer style="background: #333; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
+        <p>&copy; 2024 Programming Quiz. All rights reserved.</p>
+    </footer>
+
+    <script>
+        if (localStorage.getItem('isLoggedIn')) {
+            document.getElementById('profile-nav').style.display = 'block';
+        }
+        
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+                menu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

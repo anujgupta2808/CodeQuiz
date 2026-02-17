@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Programming Quiz</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="quiz-styles.css">
+</head>
+<body>
+    <nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <a href="index.html" class="nav-logo"><img src="favicon.svg" alt="CodeQuiz" style="width: 32px; height: 32px; margin-right: 0.5rem;"> CodeQuiz</a>
+        <ul id="nav-menu">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="learning.html">Learning</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li id="profile-nav" style="display: none;"><a href="profile.html">Profile</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>🚀 Master Programming Skills</h1>
+        <p>Test your knowledge across 8 programming languages with 700+ questions</p>
+        <a href="quiz-game.html" class="hero-btn">Start Quiz Now</a>
+    </section>
+
+    <main>
+        <section class="features">
+            <div class="feature-card">
+                <h3>📚 700+ Questions</h3>
+                <p>Comprehensive question bank covering basic to advanced topics</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎯 8 Languages</h3>
+                <p>HTML, CSS, JavaScript, PHP, C, C++, Java, Python</p>
+            </div>
+            <div class="feature-card">
+                <h3>📊 Track Progress</h3>
+                <p>Monitor your score, correct answers, and learning journey</p>
+            </div>
+            <div class="feature-card">
+                <h3>💡 Instant Feedback</h3>
+                <p>Get immediate results with detailed explanations</p>
+            </div>
+        </section>
+
+        <section class="languages">
+            <h2>Supported Languages</h2>
+            <div class="lang-grid">
+                <div class="lang-card">
+                    <h3 style="color: #ff6b6b;">HTML</h3>
+                    <p>100 Questions</p>
+                </div>
+                <div class="lang-card">
+                    <h3 style="color: #4ecdc4;">CSS</h3>
+                    <p>100 Questions</p>
+                </div>
+                <div class="lang-card">
+                    <h3 style="color: #f7dc6f;">JavaScript</h3>
+                    <p>100 Questions</p>
+                </div>
+                <div class="lang-card">
+                    <h3 style="color: #8e44ad;">PHP</h3>
+                    <p>100 Questions</p>
+                </div>
+                <div class="lang-card">
+                    <h3 style="color: #3498db;">C</h3>
+                    <p>80 Questions</p>
+                </div>
+                <div class="lang-card">
+                    <h3 style="color: #e74c3c;">C++</h3>
+                    <p>80 Questions</p>
+                </div>
+                <div class="lang-card">
+                    <h3 style="color: #e67e22;">Java</h3>
+                    <p>80 Questions</p>
+                </div>
+                <div class="lang-card">
+                    <h3 style="color: #2ecc71;">Python</h3>
+                    <p>80 Questions</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Programming Quiz. All rights reserved.</p>
+    </footer>
+
+    <script>
+        if (localStorage.getItem('isLoggedIn')) {
+            document.getElementById('profile-nav').style.display = 'block';
+        }
+        
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+                menu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

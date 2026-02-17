@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Programming Quiz</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="quiz-styles.css">
+    <script src="quiz-questions.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <a href="index.html" class="nav-logo"><img src="favicon.svg" alt="CodeQuiz" style="width: 32px; height: 32px; margin-right: 0.5rem;"> CodeQuiz</a>
+        <ul id="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="learning.html">Learning</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li id="profile-nav" style="display: none;"><a href="profile.html">Profile</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1>🎯 Programming Quiz Game</h1>
+        <p>Test your HTML, CSS, JavaScript, PHP, C, C++, Java & Python skills</p>
+    </header>
+
+    <main>
+        <section class="stats">
+            <div class="stat-card">
+                <h3 id="score">0</h3>
+                <p>Score</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="correct">0</h3>
+                <p>Correct</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="total-answered">0</h3>
+                <p>Answered</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="timer">00:00</h3>
+                <p>Time</p>
+            </div>
+        </section>
+
+        <section class="controls">
+            <div class="difficulty-selector">
+                <label>Difficulty:</label>
+                <button class="diff-btn active" data-diff="all">All</button>
+                <button class="diff-btn" data-diff="easy">Easy</button>
+                <button class="diff-btn" data-diff="medium">Medium</button>
+                <button class="diff-btn" data-diff="hard">Hard</button>
+            </div>
+            <div class="timer-control">
+                <label>
+                    <input type="checkbox" id="timer-toggle"> Enable Timer
+                </label>
+                <button id="reset-btn" class="btn-secondary">Reset Quiz</button>
+            </div>
+        </section>
+
+        <section class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="html">HTML</button>
+            <button class="filter-btn" data-filter="css">CSS</button>
+            <button class="filter-btn" data-filter="javascript">JavaScript</button>
+            <button class="filter-btn" data-filter="php">PHP</button>
+            <button class="filter-btn" data-filter="c">C</button>
+            <button class="filter-btn" data-filter="cpp">C++</button>
+            <button class="filter-btn" data-filter="java">Java</button>
+            <button class="filter-btn" data-filter="python">Python</button>
+        </section>
+
+        <section class="progress-section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <p class="progress-text" id="progress-text">Question 1 of 720</p>
+        </section>
+
+        <section class="question-card">
+            <div class="question-header">
+                <span class="category" id="category">HTML</span>
+                <span class="difficulty" id="difficulty">Easy</span>
+                <span class="question-number" id="question-number">#1</span>
+            </div>
+            <h2 id="question-text">Loading question...</h2>
+            <div id="question-content"></div>
+            <div id="options-container"></div>
+            <div id="result-message"></div>
+            <div class="actions">
+                <button id="submit-btn" class="btn-primary">Submit Answer</button>
+                <button id="next-btn" class="btn-secondary">Next Question</button>
+                <button id="bookmark-btn" class="btn-secondary">🔖 Bookmark</button>
+            </div>
+        </section>
+
+        <section class="quiz-summary" id="quiz-summary" style="display:none;">
+            <h2>Quiz Summary</h2>
+            <div class="summary-stats">
+                <div class="summary-item">
+                    <h3 id="final-score">0</h3>
+                    <p>Final Score</p>
+                </div>
+                <div class="summary-item">
+                    <h3 id="final-correct">0</h3>
+                    <p>Correct Answers</p>
+                </div>
+                <div class="summary-item">
+                    <h3 id="final-percentage">0%</h3>
+                    <p>Accuracy</p>
+                </div>
+                <div class="summary-item">
+                    <h3 id="final-time">00:00</h3>
+                    <p>Total Time</p>
+                </div>
+            </div>
+            <button id="restart-btn" class="btn-primary">Start New Quiz</button>
+        </section>
+    </main>
+
+    <footer style="background: #333; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
+        <p>&copy; 2024 Programming Quiz. All rights reserved.</p>
+    </footer>
+
+    <script src="quiz-script.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Check authentication
+        Auth.requireAuth();
+        document.getElementById('profile-nav').style.display = 'block';
+        
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+                menu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

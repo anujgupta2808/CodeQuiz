@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CodeQuiz</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="quiz-styles.css">
+    <script src="auth.js"></script>
+</head>
+<body>
+
+    </div>
+
+    <div style="display: flex; justify-content: center; align-items: center; min-height: 70vh; padding: 2rem;">
+        <div style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); padding: 3rem; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); max-width: 450px; width: 100%;">
+            <h1 style="color: white; text-align: center; margin-bottom: 2rem; font-size: 2.5rem; text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);">Login</h1>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">Login</button>
+                
+                <p style="text-align: center; margin-top: 1.5rem; color: rgba(255, 255, 255, 0.9);">
+                    Don't have an account? <a href="register.html" style="color: #6366f1; background: rgba(255, 255, 255, 0.9); padding: 0.2rem 0.6rem; border-radius: 15px; text-decoration: none; font-weight: 600;">Register</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- <footer style="background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(20px); color: white; text-align: center; padding: 2rem; margin-top: 3rem; border-top: 1px solid rgba(255, 255, 255, 0.2);">
+        <p style="color: rgba(255, 255, 255, 0.9);">&copy; 2024 Programming Quiz. All rights reserved.</p>
+    </footer> -->
+
+    <script>
+        // Redirect if already logged in
+        if (Auth.isAuthenticated()) {
+            window.location.href = 'index.html';
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            const result = Auth.login(email, password);
+            
+            if (result.success) {
+                alert(result.message);
+                window.location.href = 'index.html';
+            } else {
+                alert(result.message);
+            }
+        });
+    </script>
+</body>
+</html>

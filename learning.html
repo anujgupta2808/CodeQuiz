@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning - Programming Quiz</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="quiz-styles.css">
+</head>
+<body>
+    <nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <a href="index.html" class="nav-logo"><img src="favicon.svg" alt="CodeQuiz" style="width: 32px; height: 32px; margin-right: 0.5rem;"> CodeQuiz</a>
+        <ul id="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="learning.html" class="active">Learning</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li id="profile-nav" style="display: none;"><a href="profile.html">Profile</a></li>
+        </ul>
+    </nav>
+
+    <div class="learning-header">
+        <h1>📚 Learning Resources</h1>
+        <p>Comprehensive tutorials and guides for all programming languages</p>
+    </div>
+
+    <div class="learning-content">
+        <div class="topic-section">
+            <h2>🌐 Web Development</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h4>HTML Basics</h4>
+                    <p>Learn HTML tags, attributes, forms, and semantic elements</p>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">MDN HTML Guide →</a>
+                </div>
+                <div class="resource-card">
+                    <h4>CSS Styling</h4>
+                    <p>Master selectors, flexbox, grid, animations, and responsive design</p>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">MDN CSS Guide →</a>
+                </div>
+                <div class="resource-card">
+                    <h4>JavaScript</h4>
+                    <p>Variables, functions, DOM manipulation, async programming</p>
+                    <a href="https://javascript.info/" target="_blank">JavaScript.info →</a>
+                </div>
+                <div class="resource-card">
+                    <h4>PHP & MySQL</h4>
+                    <p>Server-side scripting, database operations, and web applications</p>
+                    <a href="https://www.php.net/manual/en/" target="_blank">PHP Manual →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="topic-section">
+            <h2>💻 System Programming</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h4>C Programming</h4>
+                    <p>Pointers, memory management, data structures, file handling</p>
+                    <a href="https://www.learn-c.org/" target="_blank">Learn C →</a>
+                </div>
+                <div class="resource-card">
+                    <h4>C++ Programming</h4>
+                    <p>OOP, STL, templates, smart pointers, modern C++ features</p>
+                    <a href="https://www.learncpp.com/" target="_blank">Learn C++ →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="topic-section">
+            <h2>☕ Object-Oriented Programming</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h4>Java</h4>
+                    <p>Classes, inheritance, interfaces, collections, streams</p>
+                    <a href="https://docs.oracle.com/javase/tutorial/" target="_blank">Oracle Java Tutorial →</a>
+                </div>
+                <div class="resource-card">
+                    <h4>Python</h4>
+                    <p>Syntax, data structures, OOP, decorators, async programming</p>
+                    <a href="https://docs.python.org/3/tutorial/" target="_blank">Python Tutorial →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="topic-section">
+            <h2>📖 Learning Path</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h4>Beginner</h4>
+                    <p>Start with HTML, CSS, and basic JavaScript or Python</p>
+                </div>
+                <div class="resource-card">
+                    <h4>Intermediate</h4>
+                    <p>Learn PHP, Java, or C++ with database integration</p>
+                </div>
+                <div class="resource-card">
+                    <h4>Advanced</h4>
+                    <p>Master algorithms, design patterns, and system design</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="topic-section">
+            <h2>🎯 Practice Tips</h2>
+            <ul style="line-height: 2;">
+                <li>Start with easy questions and gradually increase difficulty</li>
+                <li>Practice daily for at least 30 minutes</li>
+                <li>Review incorrect answers to understand concepts</li>
+                <li>Build real projects to apply your knowledge</li>
+                <li>Join coding communities and participate in discussions</li>
+                <li>Take the quiz regularly to track your progress</li>
+            </ul>
+        </div>
+
+        <div class="topic-section" style="text-align: center;">
+            <h2>🚀 Ready to Test Your Skills?</h2>
+            <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 2rem;">Put your knowledge to the test with our interactive quiz</p>
+            <a href="quiz-game.html" class="hero-btn">Start Quiz Now</a>
+        </div>
+    </div>
+
+    <footer style="background: #333; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
+        <p>&copy; 2024 Programming Quiz. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Check authentication
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        } else {
+            document.getElementById('profile-nav').style.display = 'block';
+        }
+        
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+                menu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
